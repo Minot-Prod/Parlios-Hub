@@ -1,78 +1,85 @@
-﻿const TOOLS = [
+﻿import type { Metadata } from "next";
+import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Outils IA Parlios — gratuits & simples",
+};
+
+const categories = [
   {
-    id: "site-preview",
-    name: "Site Preview IA",
-    description:
-      "Génère un hero de site et une structure de page à partir de quelques phrases.",
-    status: "beta",
+    title: "Temps & organisation",
+    description: "Planifier ta semaine, clarifier tes priorités, organiser tes projets.",
+    hint: "Ex : plan de semaine, récap de journée, checklist projet."
   },
   {
-    id: "planner-ia",
-    name: "Planner IA",
-    description:
-      "Propose une organisation de ta semaine en fonction de tes projets et priorités.",
-    status: "soon",
+    title: "Business & offres",
+    description: "T&apos;aider à structurer une offre, une page de vente, un tunnel simple.",
+    hint: "Ex : pitch d&apos;offre, plan d&apos;appel, séquence emails."
   },
   {
-    id: "inbox-ia",
-    name: "Inbox IA",
-    description:
-      "Aide à traiter plus vite tes messages, mails et demandes en gardant ton style.",
-    status: "soon",
+    title: "Contenus & présentation",
+    description: "Créer plus facilement des textes, slides et ressources pédagogiques.",
+    hint: "Ex : plan de présentation, script vidéo, post LinkedIn."
   },
   {
-    id: "content-lab",
-    name: "Content Lab",
-    description:
-      "Idées et brouillons pour posts, emails, scripts vidéos et contenus.",
-    status: "soon",
-  },
+    title: "Technique & automatisation",
+    description: "Accompagner tes premières automatisations sans jargon inutile.",
+    hint: "Ex : scénario simple, mapping des outils, checklist technique."
+  }
 ];
 
 export default function OutilsPage() {
   return (
-    <div className="mx-auto flex max-w-5xl flex-col gap-8 px-4 py-10 md:px-0">
-      <section className="space-y-3">
-        <p className="text-xs font-semibold uppercase tracking-[0.35em] text-sky-400">
-          Boîte à outils
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 space-y-10">
+      <header className="space-y-3">
+        <p className="text-[11px] font-semibold tracking-[0.25em] uppercase text-zinc-500">
+          Parlios · Outils
         </p>
-        <h1 className="text-3xl font-semibold text-slate-50">
-          Les outils Parlios pour te faire gagner du temps.
+        <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight">
+          Une collection d&apos;outils IA pensés pour le terrain.
         </h1>
-        <p className="text-sm md:text-base text-slate-300">
-          L&apos;objectif n&apos;est pas de te perdre dans un catalogue d&apos;apps, mais
-          de te proposer quelques outils concrets, utiles, et simples à utiliser.
-          Certains sont déjà accessibles, d&apos;autres arriveront au fur et à mesure.
+        <p className="text-sm sm:text-base text-zinc-600 max-w-2xl">
+          L&apos;objectif n&apos;est pas de te perdre avec 300 fonctionnalités.
+          C&apos;est de te proposer des petits outils IA ciblés, gratuits, que tu peux
+          tester en quelques minutes pour voir un résultat concret.
         </p>
-      </section>
+      </header>
 
-      <section className="grid gap-4 md:grid-cols-2">
-        {TOOLS.map((tool) => (
+      <section className="grid gap-6 sm:grid-cols-2">
+        {categories.map((cat) => (
           <div
-            key={tool.id}
-            className="flex flex-col justify-between rounded-2xl border border-slate-800 bg-slate-950/70 p-4 shadow-[0_0_24px_rgba(15,23,42,0.7)]"
+            key={cat.title}
+            className="rounded-2xl border border-zinc-200 bg-white p-4 flex flex-col gap-2"
           >
-            <div className="space-y-1.5">
-              <div className="flex items-center gap-2">
-                <h2 className="text-sm font-semibold text-slate-50">
-                  {tool.name}
-                </h2>
-                <span className="rounded-full border border-slate-700 px-2 py-0.5 text-[0.6rem] uppercase tracking-[0.14em] text-slate-400">
-                  {tool.status}
-                </span>
-              </div>
-              <p className="text-xs text-slate-300">{tool.description}</p>
-            </div>
-            <div className="mt-3">
-              <button
-                type="button"
-                className="text-[0.7rem] font-semibold text-sky-400 hover:text-sky-300"
-              >
-                Ouvrir (bientôt)
-              </button>
-            </div>
+            <h2 className="text-sm font-semibold text-zinc-900">
+              {cat.title}
+            </h2>
+            <p className="text-sm text-zinc-600">
+              {cat.description}
+            </p>
+            <p className="text-[11px] text-zinc-500">
+              {cat.hint}
+            </p>
           </div>
         ))}
+      </section>
+
+      <section className="rounded-2xl border border-dashed border-zinc-300 bg-white/60 p-5 space-y-3">
+        <h2 className="text-sm font-semibold text-zinc-900">
+          La suite arrive progressivement.
+        </h2>
+        <p className="text-sm text-zinc-600">
+          Les premiers outils seront publiés dans les prochaines semaines : chaque outil
+          aura sa propre page, une explication simple, et un bouton pour tester / lier
+          ton compte.
+        </p>
+        <p className="text-sm text-zinc-600">
+          En attendant, tu peux déjà passer par le{" "}
+          <Link href="/hub" className="font-medium text-amber-600 hover:text-amber-700">
+            Hub IA Parlios
+          </Link>{" "}
+          pour décrire ce que tu veux faire : Parlios te proposera un chemin adapté.
+        </p>
       </section>
     </div>
   );
