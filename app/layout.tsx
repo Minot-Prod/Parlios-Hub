@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   description: "Parlios · Hub IA, outils gratuits et mouvement pour entrepreneurs.",
 };
 
+import ThemeSwitch from "../components/ThemeSwitch";
 export default function RootLayout({
   children,
 }: {
@@ -23,3 +24,4 @@ export default function RootLayout({
     </html>
   );
 }
+
