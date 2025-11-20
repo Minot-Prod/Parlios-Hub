@@ -1,28 +1,32 @@
 ﻿import type { Metadata } from "next";
 import "./globals.css";
 import Link from "next/link";
-import * as React from "react";
 import ThemeSwitch from "../components/ThemeSwitch";
 
 export const metadata: Metadata = {
   title: "Parlios — Hub IA & Mouvement",
   description:
-    "Parlios aide les entrepreneurs à optimiser leur temps et leur business avec une IA simple, humaine et utile."
+    "Parlios aide les entrepreneurs à reprendre le contrôle de leur temps et de leur business grâce à une IA simple, humaine et utile."
 };
 
-function NavLink({
-  href,
-  children
-}: {
-  href: string;
-  children: React.ReactNode;
-}) {
+const navLinks = [
+  { href: "/hub", label: "Hub" },
+  { href: "/projet-parlios", label: "Projet" },
+  { href: "/outils", label: "Boîte à outils" },
+  { href: "/application", label: "Application" },
+  { href: "/communaute", label: "Communauté" },
+  { href: "/actualites", label: "Actualités" },
+  { href: "/temoignages-impact", label: "Impact" },
+  { href: "/contact", label: "Contact" }
+];
+
+function NavLink({ href, label }: { href: string; label: string }) {
   return (
     <Link
       href={href}
       className="text-sm text-zinc-700 hover:text-zinc-900 hover:font-medium transition-colors"
     >
-      {children}
+      {label}
     </Link>
   );
 }
@@ -37,8 +41,7 @@ export default function RootLayout({
       <body className="min-h-screen bg-zinc-50 text-zinc-900 antialiased">
         <div className="border-b border-zinc-200 bg-white/90 backdrop-blur">
           <header className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center gap-6">
-            {/* Logo Parlios -> Hub */}
-            <Link href="/hub" className="flex items-center gap-2 flex-shrink-0">
+            <Link href="/" className="flex items-center gap-2">
               <img
                 src="/parlios-logo.png"
                 alt="Parlios"
@@ -49,19 +52,13 @@ export default function RootLayout({
               </span>
             </Link>
 
-            {/* Nav centrée */}
-            <nav className="flex-1 flex items-center justify-center gap-4 text-sm">
-              <NavLink href="/hub">Parlios</NavLink>
-              <NavLink href="/projet-parlios">Projet</NavLink>
-              <NavLink href="/outils">Boîte à outils</NavLink>
-              <NavLink href="/communaute">Communauté</NavLink>
-              <NavLink href="/actualites">Actualités</NavLink>
-              <NavLink href="/temoignages-impact">Impact</NavLink>
-              <NavLink href="/contact">Contact</NavLink>
+            <nav className="flex items-center gap-4 text-sm ml-6">
+              {navLinks.map((link) => (
+                <NavLink key={link.href} href={link.href} label={link.label} />
+              ))}
             </nav>
 
-            {/* Switch thème à droite */}
-            <div className="flex-shrink-0">
+            <div className="ml-auto">
               <ThemeSwitch />
             </div>
           </header>
